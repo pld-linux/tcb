@@ -1,4 +1,8 @@
 #
+# TODO
+# - Integrate crypt_blowfish into glibc (or an external lib?)
+# - Depend on the new glibc or external lib
+#
 Summary:	the alternative to shadow
 Name:		tcb
 Version:	1.0
@@ -16,6 +20,20 @@ The tcb package contains core components of our tcb suite implementing
 the alternative password shadowing scheme on Owl. It is being made
 available separately from Owl primarily for use by other
 distributions.
+
+%package devel
+Summary:	Headers for libtcb
+Group:		Development/Libraries
+
+%description devel
+Headers for libtcb.
+
+%package static
+Summary:	Static library for libtcb
+Group:		Development/Libraries
+
+%description static
+Static library for libtcb.
 
 %package -n pam-pam_tcb
 Summary:	TCB module for PAM
@@ -52,22 +70,42 @@ networks, protocols, users, RPCs, services and shadow passwords
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIBEXECDIR=%{_libexecdir} \
+	MANDIR=%{_mandir}
+
+mv $RPM_BUILD_ROOT%{_libexecdir}/chkpwd/tcb_chkpwd $RPM_BUILD_ROOT/sbin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/chsh
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/passwd
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/useradd
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/shadow
-%exclude %{_mandir}/man8/pam_rpasswd.8*
+%attr(755,root,root) /lib/libtcb.so.0.9.8
+%attr(755,root,root) /sbin/tcb_convert
+%attr(755,root,root) /sbin/tcb_unconvert
+%attr(755,root,root) /sbin/tcb_chkpwd
+%{_mandir}/man5/tcb.5*
+%{_mandir}/man8/tcb_convert.8*
+%{_mandir}/man8/tcb_unconvert.8
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/tcb.h
+
+%files static
+%defattr(644,root,root,755)
+%{_prefix}/lib/libtcb.a
+
+#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/chsh
+#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/passwd
+#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/useradd
+#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/shadow
+#%exclude %{_mandir}/man8/pam_rpasswd.8*
 
 %files -n nss_tcb
 %defattr(644,root,root,755)
-%attr(755,root,root) /%{_lib}/xxx
+%attr(755,root,root) /%{_lib}/libnss*.so.*
 
 %files -n pam-pam_tcb
 %defattr(644,root,root,755)
