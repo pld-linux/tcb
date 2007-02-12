@@ -4,7 +4,7 @@
 # - Depend on the new glibc or external lib
 #
 Summary:	The alternative to shadow
-Summary(pl.UTF-8):   Alternatywa dla shadow
+Summary(pl.UTF-8):	Alternatywa dla shadow
 Name:		tcb
 Version:	1.0
 Release:	0.1
@@ -29,7 +29,7 @@ oddzielnie głównie do wykorzystania przez inne dystrybucje.
 
 %package devel
 Summary:	Headers for libtcb
-Summary(pl.UTF-8):   Pliki nagłówkowe libtcb
+Summary(pl.UTF-8):	Pliki nagłówkowe libtcb
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -41,7 +41,7 @@ Pliki nagłówkowe libtcb.
 
 %package static
 Summary:	Static library for libtcb
-Summary(pl.UTF-8):   Biblioteka statyczna libtcb
+Summary(pl.UTF-8):	Biblioteka statyczna libtcb
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -53,7 +53,7 @@ Biblioteka statyczna libtcb.
 
 %package -n pam-pam_tcb
 Summary:	TCB module for PAM
-Summary(pl.UTF-8):   Moduł TCB dla PAM
+Summary(pl.UTF-8):	Moduł TCB dla PAM
 Group:		Base
 
 %description -n pam-pam_tcb
@@ -64,7 +64,7 @@ Alternatywny dla shadow (TCB) moduł PAM.
 
 %package -n nss_tcb
 Summary:	TCB library for NSS
-Summary(pl.UTF-8):   Biblioteka TCB dla NSS
+Summary(pl.UTF-8):	Biblioteka TCB dla NSS
 Group:		Base
 
 %description -n nss_tcb
