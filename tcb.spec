@@ -4,7 +4,7 @@
 # - Depend on the new glibc or external lib
 #
 Summary:	The alternative to shadow
-Summary(pl):	Alternatywa dla shadow
+Summary(pl.UTF-8):   Alternatywa dla shadow
 Name:		tcb
 Version:	1.0
 Release:	0.1
@@ -22,49 +22,49 @@ alternative password shadowing scheme on Owl. It is being made
 available separately from Owl primarily for use by other
 distributions.
 
-%description -l pl
-Pakiet tcb zawiera g≥Ûwne komponenty zestawu tcb implementuj±cego
-alternatywny schemat ukrywania hase≥ w systemie Owl. Jest dostÍpny
-oddzielnie g≥Ûwnie do wykorzystania przez inne dystrybucje.
+%description -l pl.UTF-8
+Pakiet tcb zawiera g≈Ç√≥wne komponenty zestawu tcb implementujƒÖcego
+alternatywny schemat ukrywania hase≈Ç w systemie Owl. Jest dostƒôpny
+oddzielnie g≈Ç√≥wnie do wykorzystania przez inne dystrybucje.
 
 %package devel
 Summary:	Headers for libtcb
-Summary(pl):	Pliki nag≥Ûwkowe libtcb
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe libtcb
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Headers for libtcb.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe libtcb.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe libtcb.
 
 %package static
 Summary:	Static library for libtcb
-Summary(pl):	Biblioteka statyczna libtcb
+Summary(pl.UTF-8):   Biblioteka statyczna libtcb
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static library for libtcb.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna libtcb.
 
 %package -n pam-pam_tcb
 Summary:	TCB module for PAM
-Summary(pl):	Modu≥ TCB dla PAM
+Summary(pl.UTF-8):   Modu≈Ç TCB dla PAM
 Group:		Base
 
 %description -n pam-pam_tcb
 The alternative to shadow (TCB) PAM module.
 
-%description -n pam-pam_tcb -l pl
-Alternatywny dla shadow (TCB) modu≥ PAM.
+%description -n pam-pam_tcb -l pl.UTF-8
+Alternatywny dla shadow (TCB) modu≈Ç PAM.
 
 %package -n nss_tcb
 Summary:	TCB library for NSS
-Summary(pl):	Biblioteka TCB dla NSS
+Summary(pl.UTF-8):   Biblioteka TCB dla NSS
 Group:		Base
 
 %description -n nss_tcb
@@ -73,12 +73,12 @@ to be used as a primary source of aliases, ethers, groups, hosts,
 networks, protocols, users, RPCs, services and shadow passwords
 (instead of or in addition to using flat files or NIS).
 
-%description -n nss_tcb -l pl
-nss_tcb to biblioteka rozszerzenia (modu≥ NSS) pozwalaj±cy na uøywanie
-us≥ugi TCB jako g≥Ûwnego ºrÛd≥a aliasÛw (aliases), adresÛw kart
-sieciowych (ethers), grup (group), hostÛw (hosts), sieci (networks),
-protoko≥Ûw (protocols), uøytkownikÛw (passwd), RPC, us≥ug (services) i
-ukrytych hase≥ (shadow) zamiast p≥askich plikÛw lub NIS.
+%description -n nss_tcb -l pl.UTF-8
+nss_tcb to biblioteka rozszerzenia (modu≈Ç NSS) pozwalajƒÖcy na u≈ºywanie
+us≈Çugi TCB jako g≈Ç√≥wnego ≈∫r√≥d≈Ça alias√≥w (aliases), adres√≥w kart
+sieciowych (ethers), grup (group), host√≥w (hosts), sieci (networks),
+protoko≈Ç√≥w (protocols), u≈ºytkownik√≥w (passwd), RPC, us≈Çug (services) i
+ukrytych hase≈Ç (shadow) zamiast p≈Çaskich plik√≥w lub NIS.
 
 %prep
 %setup -q
