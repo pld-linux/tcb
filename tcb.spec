@@ -6,12 +6,12 @@
 Summary:	The alternative to shadow
 Summary(pl.UTF-8):	Alternatywa dla shadow
 Name:		tcb
-Version:	1.0
+Version:	1.0.2
 Release:	0.1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://www.openwall.com/tcb/%{name}-%{version}.tar.gz
-# Source0-md5:	9cf36b80cafdae41e644000a6e3b88fc
+# Source0-md5:	2e98162440615666f2f335679948fff1
 Patch0:		%{name}-make.patch
 URL:		http://www.openwall.com/tcb/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -99,6 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	SLIBDIR=/%{_lib} \
+	LIBDIR=%{_libdir} \
 	LIBEXECDIR=%{_libexecdir} \
 	MANDIR=%{_mandir}
 
