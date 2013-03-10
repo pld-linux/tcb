@@ -6,13 +6,18 @@
 Summary:	The alternative to shadow
 Summary(pl.UTF-8):	Alternatywa dla shadow
 Name:		tcb
-Version:	1.0.2
+Version:	1.1
 Release:	0.1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://www.openwall.com/tcb/%{name}-%{version}.tar.gz
-# Source0-md5:	2e98162440615666f2f335679948fff1
+# Source0-md5:	b4ac25f22fd3bdc9eb32ff6f97f022cd
 Patch0:		%{name}-make.patch
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
+Requires(pre):	/bin/id
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
 URL:		http://www.openwall.com/tcb/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -108,6 +113,17 @@ mv $RPM_BUILD_ROOT%{_libexecdir}/chkpwd/tcb_chkpwd $RPM_BUILD_ROOT/sbin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%pre
+%groupadd -g 286 -r -f shadow
+
+%postun
+if [ "$1" = "0" ]; then
+	%groupremove shadow
+fi
+
+%post   libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
