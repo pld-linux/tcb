@@ -13,12 +13,12 @@ Group:		Applications/System
 Source0:	http://www.openwall.com/tcb/%{name}-%{version}.tar.gz
 # Source0-md5:	b4ac25f22fd3bdc9eb32ff6f97f022cd
 Patch0:		%{name}-make.patch
+URL:		http://www.openwall.com/tcb/
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-URL:		http://www.openwall.com/tcb/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -109,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 	LIBEXECDIR=%{_libexecdir} \
 	MANDIR=%{_mandir}
 
-mv $RPM_BUILD_ROOT%{_libexecdir}/chkpwd/tcb_chkpwd $RPM_BUILD_ROOT/sbin
+%{__mv} $RPM_BUILD_ROOT%{_libexecdir}/chkpwd/tcb_chkpwd $RPM_BUILD_ROOT/sbin
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -117,17 +117,18 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 %groupadd -g 286 -r -f shadow
 
+%post -p /sbin/ldconfig
+
 %postun
+/sbin/ldconfig
 if [ "$1" = "0" ]; then
 	%groupremove shadow
 fi
 
-%post   libs -p /sbin/ldconfig
-%postun libs -p /sbin/ldconfig
-
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) /%{_lib}/libtcb.so.0.9.8
+%attr(755,root,root) %ghost /%{_lib}/libtcb.so.0
 %attr(755,root,root) /sbin/tcb_convert
 %attr(755,root,root) /sbin/tcb_unconvert
 %attr(755,root,root) /sbin/tcb_chkpwd
@@ -144,17 +145,11 @@ fi
 %defattr(644,root,root,755)
 %{_libdir}/libtcb.a
 
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/chsh
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/passwd
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/useradd
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/shadow
-#%exclude %{_mandir}/man8/pam_rpasswd.8*
-
 %files -n nss_tcb
 %defattr(644,root,root,755)
-%attr(755,root,root) /%{_lib}/libnss*.so.*
+%attr(755,root,root) /%{_lib}/libnss_tcb.so.2
 
 %files -n pam-pam_tcb
 %defattr(644,root,root,755)
-%attr(755,root,root) /%{_lib}/security/*.so
-%{_mandir}/man8/pam_*.8*
+%attr(755,root,root) /%{_lib}/security/pam_tcb.so
+%{_mandir}/man8/pam_tcb.8*
